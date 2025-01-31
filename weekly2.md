@@ -24,4 +24,54 @@ TOP-DOWN방식으로 프로그래밍 및 동작하는 방식이다. 단순히 �
 - 다형성
   객체를 활용하면서 이를 다양한 형태로 변형하여 필요한 상황에 맞게 사용할 수 있다는 특징이다. 객체의 상속이나 오버로드, 오버라이드가 대표적이다.
 
+---
+
 # 2. Promise의 3가지 상태
+
+## 2.1 States
+
+![Promise](./weekly2/promises.png)
+
+비동기 처리를 위해 promise를 활용할 때 3가지의 상태가 있다.
+
+1. pending: 초기상태(대기)
+2. fulfilled: 이행완료상태
+3. rejected: 거부상태
+
+또한 fulfiiled와 rejected된 상태를 합쳐 being settled(확정된)상태라고 한다. 이는 상태 중 하나는 아니며 편의상 표현일 뿐이다.
+
+```
+function getArticle(id) {
+  return new Promise((resolve) => {
+    instance
+      .get(`articles/${id}`)
+      .then((res) => {
+        if (parseInt(res.status / 100) != 2) {
+          throw new Error(res);
+        } else {
+          console.log(res.data);
+          resolve(res.data);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  });
+}
+```
+
+## 2.2 Fates
+
+![Fate](./weekly2/fates.png)
+
+상태 이외에도 promise는 resolved(해결된)와 unresolved(미해결된) fates가 있다.
+
+### 2.2.1 Resolved
+
+promise를 해결하기 위해 시도했을 때 효과가 없으면 해결된 것으로 간주한다. 원문을 보면 follow another promise의 이행을 위해 잠겨있는 경우를 예시로 든다. 위 예시에서 .get(`articles\${id}`)가 이행되었건 거부되었건, 아니면 사실 .get()함수에 아무것도 개발되지 않아 텅 비어있건, 이후 .then()함수에 체인이 걸리게 되면 .get()이라는 promise는 해결이 된 fate라는 것이다.  
+자체적으로 이행이나 거부가 되어도 해결된 것으로 간주한다.
+
+### 2.2.2 Unresolved
+
+unresolved는 해결되지 않은 fate로 정의된다.  
+가능한 경우로는 일반적인 pending상태, 그리고 pending상태가 아니면서 이행 혹은 거부가 되지 않은 상태가 있을 것이다. 후자의 경우 예를 들어 텅 빈 promise를 초기화한 상태가 있다. 원문의 설명과 같이 "follow another promise의 이행을 위해 잠겨있는 경우"를 예시로 들면, 이런 promise는 .then()과 같이 체인을 걸 수 있는 다른 promise에 연결할 경우 이 자체가 해결을 위해 시도하는 행위이다. 떄문에 resolved에 대한 첫 설명과 같이 "해결하기 위해 시도했을 떄 효과가 없으면"을 만족하여 해결된 것으로 간주된다.

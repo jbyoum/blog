@@ -40,6 +40,8 @@ TOP-DOWN방식으로 프로그래밍 및 동작하는 방식이다. 단순히 �
 
 또한 fulfiiled와 rejected된 상태를 합쳐 being settled(확정된)상태라고 한다. 이는 상태 중 하나는 아니며 편의상 표현일 뿐이다.
 
+문법을 위한 예시 코드는 다음과 같다.
+
 ```
 function getArticle(id) {
   return new Promise((resolve) => {
@@ -68,7 +70,7 @@ function getArticle(id) {
 
 ### 2.2.1 Resolved
 
-promise를 해결하기 위해 시도했을 때 효과가 없으면 해결된 것으로 간주한다. 원문을 보면 follow another promise의 이행을 위해 잠겨있는 경우를 예시로 든다. 위 예시에서 .get(`articles\${id}`)가 이행되었건 거부되었건, 아니면 사실 .get()함수에 아무것도 개발되지 않아 텅 비어있건, 이후 .then()함수에 체인이 걸리게 되면 .get()이라는 promise는 해결이 된 fate라는 것이다.  
+promise를 해결하기 위해 시도했을 때 효과가 없으면 해결된 것으로 간주한다. 원문을 보면 follow another promise의 이행을 위해 잠겨있는 경우를 예시로 든다. 위 예시 코드에서 .get(\`articles\${id}\`)가 이행되었건 거부되었건, 아니면 사실 .get()함수에 아무것도 개발되지 않아 텅 비어있건, 이후 .then()함수에 체인이 걸리게 되면 .get()이라는 promise는 해결이 된 fate라는 것이다.  
 자체적으로 이행이나 거부가 되어도 해결된 것으로 간주한다.
 
 ### 2.2.2 Unresolved

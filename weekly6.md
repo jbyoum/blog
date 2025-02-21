@@ -9,12 +9,12 @@
 
 아래는 한 개발자의 SNS 프로젝트 게시글의 일부이다.
 
-```
+<pre>
 프로젝트에 적용한 기술과 그 이유
 * 알림 db 의 경우 테이블의 형태가 간단하고, 조인연산이 없기 때문에 빠른 읽기 연산이 가능한 nosql(mongodb)을 사용하여 구현하였다.
 * 게시물(post) db 의 경우 SNS 특성상 쓰기 연산보다는 읽기 연산이 현저히 많다는 특징을 고려하여, 빠른 읽기 연산이 가능한 nosql(mongodb)을 사용하여 구현하였다.
 * 댓글 db 의 경우 초반에는 nosql 을 이용하려고 하였으나, 유저 db 와 post db 와 관계가 맺어져있고 조인연산이 빈번히 일어나는 특징을 고려하여 mysql 로 구현하였다.
-```
+</pre>
 
 [출처](https://creakycogwheel.tistory.com/entry/SNS%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%9A%8C%EA%B3%A0RDBMS-vs-NOSQL)
 
@@ -39,3 +39,7 @@ FK(외래키)는 ERD에서의 Relation이 표현된 것으로 테이블에서는
 경우에 따라서는 A테이블에서의 FK_A, B테이블에서의 FK_B를 합하여 FK_A + FK_B를 복합키인 하나의 PK로 사용할 수도 있다.
 
 [UP](#1-rdb와-nosql)
+
+.highlight pre{
+white-space: pre-wrap;
+}

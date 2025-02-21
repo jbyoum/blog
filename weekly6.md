@@ -36,7 +36,3 @@ FK(외래키)는 ERD에서의 Relation이 표현된 것으로 테이블에서는
 경우에 따라서는 A테이블에서의 FK_A, B테이블에서의 FK_B를 합하여 FK_A + FK_B를 복합키인 하나의 PK로 사용할 수도 있다.
 
 [UP](#1-rdb와-nosql)
-
-.highlight pre{
-white-space: pre-wrap;
-}
